@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | SipoBus</title>
+    <link rel="stylesheet" href="../styles_sipobus/styles.css">
+    <link rel="stylesheet" href="../styles_sipobus/contacto.css">
+    <link rel="icon" href="../imagenes_sipobus/logo_sipobus.png" type="logo_sipobus">
+
+    <style>
+    
+    </style>
+</head>
+<body>
+<header>
+    <div class="contenedor-header">
+    <h1 class="titulo-sipobus">SipoBus</h1>
+    <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="seleccion_asiento_y_comida.html">Selecciona asientos</a>
+        <a href="cambiar_pasaje.html">Cambiar pasaje</a>
+        <a href="anular_pasaje.html">Anular pasaje</a>
+        <a href="cupones.html">Cupones</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+    </div>
+</header>
+<main>
+    <section class="contacto-main">
+    <h2>Formulario de Contacto</h2>
+    <form class="contacto-form" id="formContacto" autocomplete="off">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+
+        <label for="email">Correo Electrónico</label>
+        <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com">
+
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" required placeholder="¿En qué podemos ayudarte?"></textarea>
+
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="mensaje-exito" style="display:none;color:var(--azul-oscuro);margin-top:1rem;text-align:center;font-weight:600;"></div>
+    </section>
+</main>
+<footer>
+    <div class="contenedor-footer">
+    <div class="footer-section">
+        <h4>Ubicación</h4>
+        <p>Santiago - Av. Alameda Libertador O'Higgins 3850, Estación Central</p>
+    </div>
+    <div class="footer-section">
+        <h4>Quiénes Somos</h4>
+        <p>Somos una empresa familiar de buses y queremos lo mejor para ti.</p>
+    </div>
+    <div class="footer-section">
+        <h4>Redes Sociales</h4>
+        <ul class="redes-sociales">
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">X / Twitter</a></li>
+        </ul>
+    </div>
+    </div>
+    <div class="footer-copy">
+    <p>&copy; 2025 SipoBus Chile. Todos los derechos reservados.</p>
+    </div>
+</footer>
+<button id="toggle-modo" aria-label="Cambiar modo claro/oscuro"></button>
+<script src="../JS Sipobus/inicio.js"></script>
+<script>
+    // Simulación de envío y guardado en localStorage
+    document.getElementById('formContacto').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+    if (!nombre || !email || !mensaje) return;
+    // Guardar en localStorage (simulación de "bandeja de entrada")
+    let mensajes = JSON.parse(localStorage.getItem('mensajesContacto') || "[]");
+    mensajes.push({ nombre, email, mensaje, fecha: new Date().toLocaleString() });
+    localStorage.setItem('mensajesContacto', JSON.stringify(mensajes));
+    document.getElementById('formContacto').reset();
+    const exito = document.getElementById('mensaje-exito');
+    exito.textContent = "¡Gracias por contactarnos! Te responderemos pronto.";
+    exito.style.display = "block";
+    setTimeout(() => { exito.style.display = "none"; }, 4000);
+    });
+</script>
+</body>
+</html>

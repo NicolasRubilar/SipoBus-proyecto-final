@@ -1,0 +1,429 @@
+/* Cambiar Pasaje CSS Completo */
+
+/* Variables de color y fuente */
+:root {
+  --color-principal: #0077ff;
+  --color-secundario: #00c6ff;
+  --color-fondo: #f4f8fb;
+  --color-texto: #1e1e2f;
+  --color-box: #fff;
+  --color-borde: #bfc9d9;
+  --color-footer: #23233a;
+  --color-footer-text: #fff;
+  --color-footer-link: #aad8ff;
+  --color-footer-link-hover: #fff;
+  --color-error: #e74c3c;
+  --color-success: #27ae60;
+  --shadow-box: 0 2px 16px rgba(30,30,47,0.10);
+  --radius: 14px;
+  --fuente: 'Poppins', Arial, sans-serif;
+}
+
+/* Reset y base */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e3f0ff 0%, #a0c4ff 50%, #0077ff 100%);
+  color: var(--color-texto);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* HEADER UNIFICADO */
+header {
+  background-color: var(--color-texto);
+  color: #ffffff;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.13);
+  flex-shrink: 0;
+  border-bottom: none;
+}
+
+.contenedor-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.titulo-sipobus {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  cursor: pointer;
+  color: #ffffff;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+
+.titulo-sipobus:hover {
+  color: #aad4ff;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+  align-items: center;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.3rem 0.5rem;
+  background: none;
+  border: none;
+  border-radius: 0;
+  transition: color 0.3s;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+nav a:first-child {
+  margin-left: 0;
+}
+
+nav a.activo,
+nav a:hover {
+  color: #e6f0fa;
+  text-decoration: underline;
+}
+
+/* RESPONSIVE HEADER */
+@media (max-width: 700px) {
+  .contenedor-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+  nav {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  nav a {
+    margin-left: 0;
+  }
+}
+
+/* MODO OSCURO HEADER */
+body.dark-mode header {
+  background-color: #1a1a2e !important;
+  color: #aad4ff !important;
+  border-bottom: none !important;
+}
+
+body.dark-mode .contenedor-header {
+  background: transparent !important;
+}
+
+body.dark-mode .titulo-sipobus {
+  color: #aad4ff !important;
+}
+
+body.dark-mode nav a {
+  color: #aad4ff !important;
+}
+
+body.dark-mode nav a.activo,
+body.dark-mode nav a:hover {
+  color: #fff !important;
+  background: none !important;
+  text-decoration: underline !important;
+}
+
+/* Contenedor principal */
+.cambiar-container {
+  max-width: 500px;
+  margin: 2.5rem auto;
+  background: var(--color-box);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 24px rgba(30,30,47,0.13);
+  padding: 2.5rem 2rem 2rem 2rem;
+  text-align: center;
+}
+
+.cambiar-container h2 {
+  color: var(--color-texto);
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.cambiar-desc {
+  color: #334155;
+  font-size: 1.08rem;
+  margin-bottom: 1.5rem;
+}
+
+.cambiar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--color-texto);
+  text-align: left;
+}
+
+.cambiar-form input,
+.cambiar-form textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background: #f8fbff;
+  color: var(--color-texto);
+  margin-bottom: 0.2rem;
+  transition: border-color 0.3s;
+}
+
+.cambiar-form input:focus,
+.cambiar-form textarea:focus {
+  border-color: var(--color-principal);
+  outline: none;
+}
+
+.btn-banner {
+  background: linear-gradient(90deg, var(--color-principal) 60%, var(--color-secundario) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.7rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,119,255,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-banner:hover {
+  background: linear-gradient(90deg, #005bb5 60%, #0099cc 100%);
+  box-shadow: 0 4px 16px rgba(0,119,255,0.13);
+}
+
+.btn-volver {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: var(--color-principal);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.btn-volver:hover {
+  color: #005bb5;
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(90deg, var(--color-texto) 0%, #334155 100%);
+  color: var(--color-footer-text);
+  padding: 1.2rem 0 0.5rem 0;
+  margin-top: auto;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 14px 14px 0 0;
+  box-shadow: 0 -1px 8px rgba(30,30,47,0.10);
+}
+
+.contenedor-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 0 1rem;
+}
+
+.footer-section {
+  flex: 1 1 140px;
+  min-width: 120px;
+  margin: 0;
+}
+
+.footer-section h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #38bdf8;
+  letter-spacing: 0.5px;
+  margin-top: 0;
+}
+
+.footer-section p,
+.footer-section ul {
+  margin: 0.2rem 0 0 0;
+  font-size: 0.92rem;
+  color: #e0e7ef;
+}
+
+.redes-sociales {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.7rem;
+}
+
+.redes-sociales a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: color 0.2s;
+}
+
+.redes-sociales a:hover {
+  color: #9ee5ff;
+}
+
+/* Responsive Footer */
+@media (max-width: 700px) {
+  .contenedor-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-section {
+    min-width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Modo oscuro footer */
+body.dark-mode footer {
+  background: #111422 !important;
+  color: #a3bbf9 !important;
+}
+
+body.dark-mode .footer-section h4 {
+  color: #68a6ff !important;
+}
+
+body.dark-mode .footer-section p,
+body.dark-mode .footer-section ul {
+  color: #a3bbf9 !important;
+}
+
+body.dark-mode .redes-sociales a {
+  color: #4a90e2 !important;
+}
+
+body.dark-mode .redes-sociales a:hover {
+  color: #82b1ff !important;
+}
+
+#viajesUsuarioContainer {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+#viajeSelect {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--color-borde);
+  font-size: 1rem;
+  background: #f8fbff;
+  color: var(--color-texto);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#viajeSelect:focus {
+  border-color: var(--color-principal);
+  outline: none;
+}
+
+#formManualCambio {
+  margin-top: 1rem;
+}
+
+/* --- MODO OSCURO: Mejoras para inputs, selects y contenedor principal --- */
+body.dark-mode .cambiar-container {
+  background: #181a2b !important;
+  color: #aad4ff !important;
+  box-shadow: 0 4px 24px rgba(30,30,47,0.25);
+}
+
+body.dark-mode .cambiar-container h2 {
+  color: #aad4ff !important;
+}
+
+body.dark-mode .cambiar-desc {
+  color: #7ea7d6 !important;
+}
+
+body.dark-mode .cambiar-form input,
+body.dark-mode .cambiar-form textarea,
+body.dark-mode #viajeSelect {
+  background: #23233a !important;
+  color: #aad4ff !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .cambiar-form input:focus,
+body.dark-mode .cambiar-form textarea:focus,
+body.dark-mode #viajeSelect:focus {
+  border-color: #68a6ff !important;
+}
+
+body.dark-mode .form-group label {
+  color: #aad4ff !important;
+}
+
+body.dark-mode .btn-banner {
+  background: linear-gradient(90deg, #005bb5 60%, #0099cc 100%) !important;
+  color: #fff !important;
+}
+
+body.dark-mode .btn-banner:hover {
+  background: linear-gradient(90deg, #003366 60%, #0077b6 100%) !important;
+}
+
+body.dark-mode .btn-volver {
+  color: #68a6ff !important;
+}
+
+body.dark-mode .btn-volver:hover {
+  color: #aad4ff !important;
+}

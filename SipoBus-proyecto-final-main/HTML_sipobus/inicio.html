@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SipoBus | Compra pasajes online</title>
+<link rel="stylesheet" href="../styles_sipobus/styles.css">
+<link rel="icon" href="../imagenes_sipobus/logo_sipobus.png" type="logo_sipobus">
+</head>
+<body>
+    <header>
+    <div class="contenedor-header">
+        <h1 class="titulo-sipobus">SipoBus</h1>
+        <nav id="nav-principal" style="flex:1;display:flex;align-items:center;justify-content:flex-end;gap:0.7rem;">
+            <span id="bienvenida-header" style="display:none;font-weight:600;font-size:1.08rem;background:#e6f0fa;color:#1e1e2f;padding:0.3rem 1rem;border-radius:8px;"></span>
+            <a href="perfil.html" id="link-perfil" style="display:none;">Mi perfil</a>
+            <a href="#" id="cerrarSesion" style="display:none;">Cerrar sesión</a>
+            <a href="crear_usuario.html" id="link-iniciar-sesion">Iniciar sesión</a>
+            <a href="seleccion_asiento_y_comida.html">Selecciona asientos</a>
+            <a href="cambiar_pasaje.html">Cambiar pasaje</a>
+            <a href="anular_pasaje.html">Anular pasaje</a>
+            <a href="cupones.html">Cupones</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
+    </div>
+    </header>
+
+<main>
+    <button id="toggle-modo" aria-label="Cambiar modo claro/oscuro" title="Alternar modo oscuro"></button>
+
+    <div class="frase-empresa" style="text-align:center;margin:1.5rem 0 2rem 0;font-size:1.25rem;font-weight:500;color:#1e1e2f;">
+        "Recorriendo Chile contigo, kilómetro a kilómetro."
+    </div>
+
+    <section class="intro">
+        <!-- Sin bienvenida ni botón de perfil aquí -->
+    </section>
+
+    <section id="Menu">
+        <article class="pasaje">
+        <h3>Crea tu usuario</h3>
+        <a href="/HTML_sipobus/registrarse.html" class="click-box">Click aquí</a>
+        </article>
+
+        <article class="pasaje">
+        <h3>¡Compra tu pasaje!</h3>
+        <a href="resumen_compra.html" class="click-box">Click aquí</a>
+        </article>
+
+        <article class="pasaje">
+        <h3>Cambia tu pasaje</h3>
+        <a href="cambiar_pasaje.html" class="click-box">Click aquí</a>
+        </article>
+
+        <article class="pasaje">
+        <h3>Anula tu pasaje</h3>
+        <a href="anular_pasaje.html" class="click-box">Click aquí</a>
+        </article>
+
+        <article class="pasaje">
+        <h3>Cupones</h3>
+        <a href="cupones.html" class="click-box">Click aquí</a>
+        </article>
+
+        <article class="pasaje">
+        <h3>Contáctanos</h3>
+        <a href="contacto.html" class="click-box">Click aquí</a>
+        </article>
+
+    <section class="destinos-populares">
+        <h2>Destinos más buscados</h2>
+        <div class="galeria-destinos">
+            <div class="destino">
+                <img src="../imagenes_sipobus/santiago.jpg" alt="Santiago">
+                <p>Santiago</p>
+            </div>
+
+            <div class="destino">
+                <img src="../imagenes_sipobus/valparaiso.jpg" alt="Valparaíso">
+                <p>Valparaíso</p>
+            </div>
+
+            <div class="destino">
+                <img src="../imagenes_sipobus/concepcion.jpg" alt="Concepción">
+                <p>Concepción</p>
+            </div>
+
+            <div class="destino">
+                <img src="../imagenes_sipobus/puerto-montt.jpg" alt="Puerto Montt">
+                <p>Puerto Montt</p>
+            </div>
+
+            <div class="destino">
+                <img src="../imagenes_sipobus/pucon.jpg" alt="Puerto Montt">
+                <p>Pucón</p>
+            </div>
+            <div class="destino">
+                <img src="../imagenes_sipobus/la_serena.jpg" alt="Puerto Montt">
+                <p>La Serena</p>
+            </div>
+
+            <div class="destino">
+                <img src="../imagenes_sipobus/Viña_del_mar.jpg" alt="Puerto Montt">
+                <p>Viña del Mar</p>
+            </div>
+
+            <div class="destino">
+                <img src="../imagenes_sipobus/iquique.jpg" alt="Puerto Montt">
+                <p>Iquique</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="banner-sesion">
+    <h2>Inicia sesión y obtén grandes descuentos</h2>
+    <a href="crear_usuario.html" class="btn-banner">Crear cuenta / Iniciar sesión</a>
+
+    </section>
+</main>
+
+<footer>
+    <div class="contenedor-footer">
+    <div class="footer-section">
+        <h4>Ubicación</h4>
+        <p>Santiago - Av. Alameda Libertador Bernardo O'Higgins 3850, Estación Central</p>
+    </div>
+    <div class="footer-section">
+        <h4>Quiénes Somos</h4>
+        <p>Somos una empresa familiar de buses y queremos lo mejor para ti.</p>
+    </div>
+    <div class="footer-section">
+        <h4>Redes Sociales</h4>
+        <ul class="redes-sociales">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">X / Twitter</a></li>
+        </ul>
+    </div>
+    </div>
+    <div class="footer-copy">
+        <p>&copy; 2025 SipoBus Chile. Todos los derechos reservados.</p>
+    </div>
+</footer>
+<script src="../JS Sipobus/inicio.js"></script>
+<script>
+// Lógica de header dinámico
+(function(){
+    const userLog = localStorage.getItem('userLogueado');
+    const linkSesion = document.getElementById('link-iniciar-sesion');
+    const bienvenidaHeader = document.getElementById('bienvenida-header');
+    const linkPerfil = document.getElementById('link-perfil');
+    const cerrarSesion = document.getElementById('cerrarSesion');
+    if(userLog) {
+        const user = JSON.parse(userLog);
+        if(bienvenidaHeader) {
+            bienvenidaHeader.textContent = `Bienvenido, ${user.nombre}`;
+            bienvenidaHeader.style.display = 'inline-block';
+        }
+        if(linkSesion) linkSesion.style.display = 'none';
+        if(linkPerfil) linkPerfil.style.display = 'inline-block';
+        if(cerrarSesion) cerrarSesion.style.display = 'inline-block';
+        cerrarSesion.onclick = function(e) {
+            e.preventDefault();
+            localStorage.removeItem('userLogueado');
+            window.location.reload();
+        };
+    } else {
+        if(bienvenidaHeader) bienvenidaHeader.style.display = 'none';
+        if(linkSesion) linkSesion.style.display = 'inline-block';
+        if(linkPerfil) linkPerfil.style.display = 'none';
+        if(cerrarSesion) cerrarSesion.style.display = 'none';
+    }
+})();
+</script>
+</body>
+</html>

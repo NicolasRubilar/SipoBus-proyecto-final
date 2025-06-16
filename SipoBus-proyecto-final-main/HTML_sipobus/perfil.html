@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil de Usuario - SipoBus</title>
+  <link rel="stylesheet" href="../styles_sipobus/perfil.css" />
+  <link rel="icon" href="../imagenes_sipobus/logo_sipobus.png" type="logo_sipobus">
+
+</head>
+<body>
+  <header>
+    <div class="contenedor-header">
+      <h1 class="titulo-sipobus">SipoBus</h1>
+      <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="seleccion_asiento_y_comida.html">Viajar</a>
+        <a href="cupones.html">Cupones</a>
+        <a href="perfil.html">Mi perfil</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="#" id="cerrarSesion">Cerrar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="perfil-container" aria-label="Perfil de usuario">
+      <div class="perfil-header">
+        <div class="perfil-info">
+          <h2 id="nombre-usuario"></h2>
+          <p><strong>Apellido:</strong> <span id="apellido-usuario"></span></p>
+          <p><strong>Nombre:</strong> <span id="nombre-usuario-span"></span></p>
+          <p><strong>Correo:</strong> <span id="correo-usuario"></span></p>
+          <p><strong>Teléfono:</strong> <span id="telefono-usuario"></span></p>
+          <button class="btn-editar" id="editarBtn" aria-label="Editar perfil">Editar perfil</button>
+        </div>
+      </div>
+
+      <dl class="perfil-detalles">
+        <dt>Dirección</dt>
+        <dd id="direccion-usuario"></dd>
+
+        <dt>Fecha de nacimiento</dt>
+        <dd id="fecha-usuario"></dd>
+      </dl>
+
+      <div class="perfil-secciones">
+        <div class="box-cupons box">
+          <h3>Cupones</h3>
+          <ul id="lista-cupones">
+            <li>No tienes cupones activos.</li>
+          </ul>
+          <a href="cupones.html" class="btn-banner" style="margin-top:1rem;display:inline-block;">Ver cupones</a>
+        </div>
+
+        <div class="box-viajes box">
+          <h3>Viajes</h3>
+          <ul id="lista-viajes">
+            <li>No tienes viajes programados.</li>
+          </ul>
+          <a href="seleccion_asiento_y_comida.html" class="btn-banner" style="margin-top:1rem;display:inline-block;">Iniciar un viaje</a>
+          <h4 style="margin-top:2rem;">Viajes anulados</h4>
+          <ul id="lista-viajes-anulados">
+            <li>No tienes viajes anulados.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal editar perfil -->
+    <div id="modalEditarPerfil" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;">
+      <div style="background:white;padding:2rem;border-radius:12px;max-width:400px;width:90%;margin:auto;position:relative;">
+        <h3>Editar perfil</h3>
+        <form id="formEditarPerfil">
+          <label>Nombre:<input type="text" id="edit-nombre" required></label><br><br>
+          <label>Apellido:<input type="text" id="edit-apellido" required></label><br><br>
+          <label>Correo:<input type="email" id="edit-correo" required></label><br><br>
+          <label>Teléfono:<input type="text" id="edit-telefono" required></label><br><br>
+          <label>Dirección:<input type="text" id="edit-direccion" required></label><br><br>
+          <label>Fecha de nacimiento:<input type="date" id="edit-fecha" required></label><br><br>
+          <button type="submit" class="btn-editar">Guardar cambios</button>
+          <button type="button" id="cerrarModalEditar" style="margin-left:1rem;">Cancelar</button>
+        </form>
+      </div>
+    </div>
+    <button id="toggle-modo" aria-label="Cambiar modo claro/oscuro"></button>
+    <script src="../JS Sipobus/inicio.js"></script>
+    <script src="../JS Sipobus/perfil.js"></script>
+    <div id="toast-container" aria-live="polite" aria-atomic="true" style="position:fixed;top:1.5rem;right:1.5rem;z-index:10000;"></div>
+  </main>
+
+  <footer>
+    <div class="contenedor-footer moderno">
+      <section class="footer-section">
+        <h3>Contacto</h3>
+        <ul class="footer-contacto">
+          <li><span class="footer-icon">✉️</span> contacto@sipobus.cl</li>
+          <li><span class="footer-icon">📞</span> +56 9 1234 5678</li>
+        </ul>
+      </section>
+      <section class="footer-section">
+        <h3>Redes Sociales</h3>
+        <ul class="redes-sociales">
+          <li><a href="#" aria-label="Facebook"><span class="footer-icon">&#xf09a;</span> Facebook</a></li>
+          <li><a href="#" aria-label="Twitter"><span class="footer-icon">&#xf099;</span> Twitter</a></li>
+          <li><a href="#" aria-label="Instagram"><span class="footer-icon">&#xf16d;</span> Instagram</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="footer-copy">&copy; 2025 SipoBus. Todos los derechos reservados.</div>
+  </footer>
+</body>
+</html>

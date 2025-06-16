@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="../imagenes_sipobus/logo_sipobus.png" type="logo_sipobus">
+<link rel="stylesheet" href="../styles_sipobus/resumen_compra.css">
+<title>Resumen de compra - SipoBus</title>
+</head>
+<body>
+<header>
+  <div class="contenedor-header">
+    <h1 class="titulo-sipobus">SipoBus</h1>
+    <nav>
+      <a href="inicio.html">Inicio</a>
+      <a href="total_compra.html">Comprar Pasaje</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h2>Selecciona tu viaje</h2>
+  <form id="formCompra">
+    <label for="origen">Origen:</label>
+    <select id="origen" name="origen" required>
+      <option value="" disabled selected>Selecciona origen</option>
+      <option value="Santiago">Santiago</option>
+      <option value="Valparaíso">Valparaíso</option>
+      <option value="Concepción">Concepción</option>
+      <option value="Puerto Montt">Puerto Montt</option>
+      <option value="Pucón">Pucón</option>
+      <option value="La Serena">La Serena</option>
+      <option value="Iquique">Iquique</option>
+    </select>
+
+    <label for="destino">Destino:</label>
+    <select id="destino" name="destino" required>
+      <option value="" disabled selected>Selecciona destino</option>
+      <option value="Santiago">Santiago</option>
+      <option value="Valparaíso">Valparaíso</option>
+      <option value="Concepción">Concepción</option>
+      <option value="Puerto Montt">Puerto Montt</option>
+      <option value="Pucón">Pucón</option>
+      <option value="La Serena">La Serena</option>
+      <option value="Iquique">Iquique</option>
+    </select>
+
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha" required />
+
+    <label for="hora">Hora:</label>
+    <input type="time" id="hora" name="hora" required />
+
+    <button type="submit">Seguir</button>
+  </form>
+</main>
+<button id="toggle-modo" aria-label="Cambiar modo claro/oscuro"></button>
+<script src="../JS Sipobus/confirmar_compra.js"></script>
+<script src="../JS Sipobus/inicio.js"></script>
+<script>
+  document.getElementById('formCompra').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const origen = document.getElementById('origen').value;
+    const destino = document.getElementById('destino').value;
+    const fecha = document.getElementById('fecha').value;
+    const hora = document.getElementById('hora').value;
+    if (!origen || !destino || !fecha || !hora) {
+      alert('Completa todos los campos.');
+      return;
+    }
+    if (origen === destino) {
+      alert('El origen y el destino no pueden ser iguales.');
+      return;
+    }
+    // Guardar en localStorage
+    localStorage.setItem('origen', origen);
+    localStorage.setItem('destino', destino);
+    localStorage.setItem('fecha', fecha);
+    localStorage.setItem('hora', hora);
+    // Redirigir a selección de asientos
+    window.location.href = 'seleccion_asiento_y_comida.html';
+  });
+</script>
+</body>
+</html>

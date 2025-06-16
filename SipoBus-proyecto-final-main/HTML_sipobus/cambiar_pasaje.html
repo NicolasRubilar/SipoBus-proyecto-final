@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar pasaje | SipoBus</title>
+    <link rel="icon" href="../imagenes_sipobus/logo_sipobus.png" type="image/png">
+    <link rel="stylesheet" href="../styles_sipobus/styles.css">
+    <link rel="stylesheet" href="../styles_sipobus/cambiar_pasaje.css">
+</head>
+<body>
+    <header>
+        <div class="contenedor-header">
+            <h1 class="titulo-sipobus">SipoBus</h1>
+            <nav>
+                <a href="crear_usuario.html">Iniciar sesión</a>
+                <a href="seleccion_asiento_y_comida.html">Selecciona asientos</a>
+                <a href="cambiar_pasaje.html" class="activo">Cambiar pasaje</a>
+                <a href="anular_pasaje.html">Anular pasaje</a>
+                <a href="cupones.html">Cupones</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cambiar-container">
+            <h2>Cambiar pasaje</h2>
+            <p class="cambiar-desc">¿Tuviste un inconveniente? Puedes cambiar tu reserva hasta 4 horas antes de la salida.</p>
+            <form class="cambiar-form" id="formCambiarPasaje" autocomplete="off">
+                <div id="viajesUsuarioContainer" style="display:none;margin-bottom:1rem;"></div>
+                <div id="formManualCambio">
+                    <label for="origen">Origen</label>
+                    <input type="text" id="origen" name="origen" placeholder="Ciudad de origen" required>
+                    <label for="destino">Destino</label>
+                    <input type="text" id="destino" name="destino" placeholder="Ciudad de destino" required>
+                    <label for="fecha">Fecha de viaje</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                    <label for="hora">Hora de viaje</label>
+                    <input type="time" id="hora" name="hora" required>
+                    <label for="asiento">Asiento(s)</label>
+                    <input type="text" id="asiento" name="asiento" placeholder="Ej: 12, 13" required>
+                </div>
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required>
+                <label for="motivo">Motivo de cambio (opcional)</label>
+                <textarea id="motivo" name="motivo" placeholder="¿Por qué deseas cambiar tu pasaje?" rows="2"></textarea>
+                <label for="nuevaFecha">Nueva fecha de viaje</label>
+                <input type="date" id="nuevaFecha" name="nuevaFecha" required>
+                <label for="nuevaHora">Nueva hora de viaje</label>
+                <input type="time" id="nuevaHora" name="nuevaHora" required>
+                <button type="submit" class="btn-banner">Cambiar</button>
+            </form>
+            <div id="mensaje-cambio" style="display:none;color:var(--color-success);margin-top:1rem;text-align:center;font-weight:600;"></div>
+            <div class="volver-inicio">
+                <a href="inicio.html" class="btn-volver">← Volver al inicio</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contenedor-footer">
+            <div class="footer-section">
+                <h4>Ubicación</h4>
+                <p>Santiago - Av. Alameda Libertador O'Higgins 3850, Estación Central</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quiénes Somos</h4>
+                <p>Somos una empresa familiar de buses y queremos lo mejor para ti.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociales</h4>
+                <ul class="redes-sociales">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">X / Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <p>&copy; 2025 SipoBus Chile. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <button id="toggle-modo" aria-label="Cambiar modo claro/oscuro"></button>
+    <script src="../JS Sipobus/inicio.js"></script>
+    <script>
+        // Mostrar viajes del usuario si está logueado
+        const user = JSON.parse(localStorage.getItem('userLogueado')||'null');
+        const viajesContainer = document.getElementById('viajesUsuarioContainer');
+        const formManual = document.getElementById('formManualCambio');
+        let viajeSelectIndex = null;
+        if(user && user.viajes && user.viajes.length) {
+            viajesContainer.style.display = 'block';
+            let html = '<label for="viajeSelect">Selecciona tu viaje:</label>';
+            html += '<select id="viajeSelect"><option value="">-- Selecciona --</option>';
+            user.viajes.forEach((v,i) => {
+                html += `<option value="${i}">${v.origen} → ${v.destino} | ${v.fecha} ${v.hora} | Asientos: ${v.asientos ? v.asientos.map(a=>a.id).join(', ') : v.asiento || ''}</option>`;
+            });
+            html += '</select>';
+            viajesContainer.innerHTML = html;
+            formManual.style.display = 'none';
+            document.getElementById('viajeSelect').onchange = function() {
+                viajeSelectIndex = this.value;
+                if(this.value) {
+                    formManual.style.display = 'none';
+                } else {
+                    formManual.style.display = 'block';
+                }
+            };
+        } else {
+            viajesContainer.style.display = 'none';
+            formManual.style.display = 'block';
+        }
+
+        // Validación y edición del viaje
+        document.querySelector('.cambiar-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = JSON.parse(localStorage.getItem('userLogueado')||'null');
+            let mensaje = '¡Solicitud de cambio enviada! Pronto recibirás un correo con la confirmación.';
+            let exito = document.getElementById('mensaje-cambio');
+            // Si seleccionó un viaje, editarlo
+            const select = document.getElementById('viajeSelect');
+            if(user && user.viajes && select && select.value !== "") {
+                const idx = parseInt(select.value, 10);
+                if(!isNaN(idx) && user.viajes[idx]) {
+                    user.viajes[idx].nuevaFecha = document.getElementById('nuevaFecha').value;
+                    user.viajes[idx].nuevaHora = document.getElementById('nuevaHora').value;
+                    user.viajes[idx].motivoCambio = document.getElementById('motivo').value;
+                    localStorage.setItem('userLogueado', JSON.stringify(user));
+                    localStorage.setItem('userProfile', JSON.stringify(user));
+                    mensaje = '¡El viaje fue actualizado correctamente!';
+                }
+            }
+            // Mostrar mensaje visual de éxito
+            if(exito) {
+                exito.textContent = mensaje;
+                exito.className = 'mensaje-exito';
+                exito.style.display = "block";
+                setTimeout(() => { exito.style.display = "none"; }, 4000);
+            } else {
+                alert(mensaje);
+            }
+            this.reset();
+            if(select && select.value !== "") {
+                setTimeout(() => location.reload(), 500);
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector('.titulo-sipobus').onclick = function() {
+                window.location.href = "inicio.html";
+            };
+        });
+    </script>
+</body>
+</html>

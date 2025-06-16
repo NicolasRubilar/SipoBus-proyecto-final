@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anular Pasaje | SipoBus</title>
+<link rel="icon" href="../imagenes_sipobus/logo_sipobus.png" type="logo_sipobus">
+<link rel="stylesheet" href="../styles_sipobus/anular_pasaje.css">
+</head>
+<body>
+<header>
+<div class="contenedor-header">
+    <h1 class="titulo-sipobus">SipoBus</h1>
+    <nav>
+    <a href="inicio.html">Inicio</a>
+    <a href="seleccion_asiento_y_comida.html">Selecciona asientos</a>
+    <a href="cambiar_pasaje.html">Cambiar pasaje</a>
+    <a href="anular_pasaje.html" class="activo">Anular pasaje</a>
+    <a href="cupones.html">Cupones</a>
+    <a href="contacto.html">Contacto</a>
+    </nav>
+</div>
+</header>
+<main>
+<section class="anular-main">
+    <h2>Anular Pasaje</h2>
+    <form class="anular-form" id="formAnularPasaje" autocomplete="off">
+      <div id="viajesUsuarioContainer" style="display:none;margin-bottom:1rem;"></div>
+      <div id="formManualAnulacion">
+        <label for="origen">Origen</label>
+        <input type="text" id="origen" name="origen" placeholder="Ciudad de origen" required>
+        <label for="destino">Destino</label>
+        <input type="text" id="destino" name="destino" placeholder="Ciudad de destino" required>
+        <label for="fecha">Fecha de viaje</label>
+        <input type="date" id="fecha" name="fecha" required>
+        <label for="hora">Hora de viaje</label>
+        <input type="time" id="hora" name="hora" required>
+        <label for="asiento">Asiento(s)</label>
+        <input type="text" id="asiento" name="asiento" placeholder="Ej: 12, 13" required>
+      </div>
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required>
+      <label for="motivo">Motivo de anulación (opcional)</label>
+      <textarea id="motivo" name="motivo" placeholder="¿Por qué deseas anular tu pasaje?" rows="2"></textarea>
+      <button type="submit">Anular</button>
+    </form>
+    <div id="mensaje-anulacion" style="display:none;color:var(--azul-oscuro);margin-top:1rem;text-align:center;font-weight:600;"></div>
+    <div style="text-align:center;margin-top:1.5rem;">
+    <a href="inicio.html" class="btn-volver">← Volver al inicio</a>
+    </div>
+</section>
+</main>
+<footer>
+<div class="contenedor-footer">
+    <div class="footer-section">
+    <h4>Ubicación</h4>
+    <p>Santiago - Av. Alameda Libertador O'Higgins 3850, Estación Central</p>
+    </div>
+    <div class="footer-section">
+    <h4>Quiénes Somos</h4>
+    <p>Somos una empresa familiar de buses y queremos lo mejor para ti.</p>
+    </div>
+    <div class="footer-section">
+    <h4>Redes Sociales</h4>
+    <ul class="redes-sociales">
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">X / Twitter</a></li>
+    </ul>
+    </div>
+</div>
+<div class="footer-copy">
+    <p>&copy; 2025 SipoBus Chile. Todos los derechos reservados.</p>
+</div>
+</footer>
+<button id="toggle-modo" aria-label="Cambiar modo claro/oscuro"></button>
+<script src="../JS Sipobus/inicio.js"></script>
+<script>
+// Mostrar viajes del usuario si está logueado
+const user = JSON.parse(localStorage.getItem('userLogueado')||'null');
+const viajesContainer = document.getElementById('viajesUsuarioContainer');
+const formManual = document.getElementById('formManualAnulacion');
+let viajeSelectIndex = null;
+if(user && user.viajes && user.viajes.length) {
+  viajesContainer.style.display = 'block';
+  let html = '<label for="viajeSelect">Selecciona tu viaje:</label>';
+  html += '<select id="viajeSelect"><option value="">-- Selecciona --</option>';
+  user.viajes.forEach((v,i) => {
+    html += `<option value="${i}">${v.origen} → ${v.destino} | ${v.fecha} ${v.hora} | Asientos: ${v.asientos ? v.asientos.map(a=>a.id).join(', ') : v.asiento || ''}</option>`;
+  });
+  html += '</select>';
+  viajesContainer.innerHTML = html;
+  formManual.style.display = 'none';
+  document.getElementById('viajeSelect').onchange = function() {
+    viajeSelectIndex = this.value;
+    if(this.value) {
+      formManual.style.display = 'none';
+    } else {
+      formManual.style.display = 'block';
+    }
+  };
+} else {
+  viajesContainer.style.display = 'none';
+  formManual.style.display = 'block';
+}
+
+// Simulación de anulación y guardado en localStorage
+const form = document.getElementById('formAnularPasaje');
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let viajeIndex = null;
+    const select = document.getElementById('viajeSelect');
+    if(select) {
+      viajeIndex = select.value;
+    }
+    let user = JSON.parse(localStorage.getItem('userLogueado')||'null');
+    let viajeAnulado = null;
+
+    if(user && user.viajes && viajeIndex && user.viajes[viajeIndex]) {
+      // Anular viaje seleccionado
+      viajeAnulado = user.viajes.splice(viajeIndex,1)[0];
+      if(!user.viajesAnulados) user.viajesAnulados = [];
+      user.viajesAnulados.push(viajeAnulado);
+      // Actualizar localStorage para reflejar cambios en perfil
+      localStorage.setItem('userLogueado', JSON.stringify(user));
+      localStorage.setItem('userProfile', JSON.stringify(user));
+    } else {
+      // Si es manual, crear objeto de viaje con los datos del formulario
+      viajeAnulado = {
+        origen: document.getElementById('origen').value,
+        destino: document.getElementById('destino').value,
+        fecha: document.getElementById('fecha').value,
+        hora: document.getElementById('hora').value,
+        asiento: document.getElementById('asiento').value
+      };
+    }
+
+    const correo = document.getElementById('correo').value.trim();
+    const motivo = document.getElementById('motivo').value.trim();
+    let anulaciones = JSON.parse(localStorage.getItem('anulacionesPasaje') || "[]");
+    anulaciones.push({
+      viaje: viajeAnulado,
+      correo,
+      motivo,
+      fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem('anulacionesPasaje', JSON.stringify(anulaciones));
+    form.reset();
+    const exito = document.getElementById('mensaje-anulacion');
+    exito.textContent = "¡Tu solicitud de anulación fue recibida! El viaje fue eliminado de tu perfil.";
+    exito.className = 'mensaje-exito';
+    exito.style.display = "block";
+    setTimeout(() => { exito.style.display = "none"; }, 1200);
+    // Refrescar select y perfil si corresponde
+    if(select && select.value !== "") {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1300);
+    }
+});
+</script>
+</body>
+</html>

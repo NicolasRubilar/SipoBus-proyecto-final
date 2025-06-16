@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registro - SipoBus</title>
+    <link rel="stylesheet" href="../styles_sipobus/registrarse.css" />
+    <link rel="icon" href="../imagenes_sipobus/logo_sipobus.png" type="image/png">
+
+</head>
+<body>
+  <header>
+    <div class="contenedor-header">
+      <h1 class="titulo-sipobus">SipoBus</h1>
+      <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="seleccion_asiento_y_comida.html">Prepara tu viaje</a>
+        <a href="cambiar_pasaje.html">Cambiar pasaje</a>
+        <a href="anular_pasaje.html">Anular pasaje</a>
+        <a href="cupones.html">Cupones</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="registro-main">
+    <div class="registro-formulario">
+      <h2>Crear cuenta</h2>
+      <form id="formRegistro" action="" novalidate>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+        </div>
+
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" id="apellido" name="apellido" placeholder="Tu apellido" required />
+        </div>
+
+        <div class="form-group">
+          <label for="correo">Correo electrónico</label>
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            placeholder="ejemplo@correo.com"
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            placeholder="+56 9 1234 5678"
+            pattern="^\+?56\s?9\s?\d{4}\s?\d{4}$"
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="fecha-nacimiento">Fecha de nacimiento</label>
+          <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required />
+        </div>
+
+        <div class="form-group">
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" name="direccion" placeholder="Tu dirección" required />
+        </div>
+
+        <div class="form-group">
+          <label for="clave">Contraseña</label>
+          <input
+            type="password"
+            id="clave"
+            name="clave"
+            placeholder="••••••••"
+            minlength="8"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="confirmar-clave">Confirmar contraseña</label>
+          <input
+            type="password"
+            id="confirmar-clave"
+            name="confirmar-clave"
+            placeholder="••••••••"
+            minlength="8"
+            required
+          />
+        </div>
+
+        <div class="form-group checkbox">
+          <label>
+            <input type="checkbox" id="terminos" required />
+            Acepto los <a href="#">términos y condiciones</a>
+          </label>
+        </div>
+        <button type="submit">Registrarse</button>
+        <a href="inicio.html" class="btn-volver">← Volver al inicio</a>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="contenedor-footer">
+      <div class="footer-section">
+        <h4>Ubicación</h4>
+        <p>Santiago - Av. Alameda Libertador O'Higgins 3850, Estación Central</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quiénes Somos</h4>
+        <p>Somos una empresa familiar de buses y queremos lo mejor para ti.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Redes Sociales</h4>
+        <ul class="redes-sociales">
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">X / Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 SipoBus Chile. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <button id="toggle-modo" aria-label="Cambiar modo claro/oscuro"></button>
+  <script src="../JS Sipobus/inicio.js"></script>
+  <script src="../JS Sipobus/registrarse.js"></script>
+  <script src="../JS Sipobus/mode.js"></script>
+</body>
+</html>

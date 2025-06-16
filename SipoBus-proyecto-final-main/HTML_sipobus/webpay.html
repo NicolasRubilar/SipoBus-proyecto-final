@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="../imagenes_sipobus/logo_sipobus.png" type="image/png">
+  <link rel="stylesheet" href="../styles_sipobus/webpay.css">
+<title>Pagar Pasaje - SipoBus</title>
+</head>
+<body>
+<header>
+  <div class="contenedor-header">
+    <h1 class="titulo-sipobus">SipoBus</h1>
+    <nav>
+      <a href="inicio.html">Inicio</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="formulario-pago">
+    <h2>Datos de la Tarjeta</h2>
+    <form id="formPago" novalidate>
+      <label for="numeroTarjeta">Número de Tarjeta</label>
+      <input type="text" id="numeroTarjeta" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" autocomplete="cc-number" required />
+      <div class="error-text" id="errorNumero"></div>
+
+      <label for="fechaExpiracion">Fecha de Expiración (MM/AA)</label>
+      <input type="text" id="fechaExpiracion" maxlength="5" placeholder="MM/AA" autocomplete="cc-exp" required />
+      <div class="error-text" id="errorFecha"></div>
+
+      <label for="cvv">CVV</label>
+      <input type="password" id="cvv" maxlength="4" placeholder="CVV" autocomplete="cc-csc" required />
+      <div class="error-text" id="errorCVV"></div>
+
+      <button type="submit">Pagar</button>
+      <div class="procesando" id="procesando">Procesando pago...</div>
+    </form>
+  </section>
+  <aside class="resumen-compra">
+    <h3>Resumen de la Compra</h3>
+    <div id="resumenCompra"></div>
+  </aside>
+</main>
+<button id="toggle-modo" aria-label="Cambiar modo claro/oscuro"></button>
+<script src="../JS Sipobus/webpay.js" ></script>
+<script src="../JS Sipobus/inicio.js"></script>
+</body>
+</html>
